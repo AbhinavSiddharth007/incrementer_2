@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect } from 'vitest';
 import IncrementerButton from './incrementer_button';
+import '@testing-library/jest-dom';
 
 describe('IncrementerButton', () => {
   it('renders with initial count of 0', () => {
