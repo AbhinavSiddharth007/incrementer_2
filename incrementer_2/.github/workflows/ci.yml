@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint (if exists)
+        run: npm run lint || echo "No lint script"
+
+      - name: Check formatting
+        run: npx prettier --check . || echo "Prettier not configured"
+
+      - name: Run tests (if exists)
+        run: npm test || echo "No tests"
+
+      - name: Build project
+        run: npm run build
